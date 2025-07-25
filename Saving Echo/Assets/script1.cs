@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class script1 : MonoBehaviour
 {
+    public Animator animator;
     public Rigidbody2D rb;
     public float jumpHeight = 5f;
     public bool isGround = true;
@@ -36,6 +37,21 @@ public class script1 : MonoBehaviour
         {
             Jump();
             //isGround = false;
+            animator.SetBool("Jump", true);
+        }
+
+        if (Mathf.Abs(movement) > 0.1f)
+        {
+            animator.SetFloat("Run", 1f);
+        }
+
+        else if(movement<0.1f)
+        {
+            animator.SetFloat("Run", 0f);
+        }
+        if(Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
         }
     }
 
@@ -53,6 +69,7 @@ public class script1 : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             isGround = true;
+            animator.SetBool("Jump", false);
         } 
         
     }

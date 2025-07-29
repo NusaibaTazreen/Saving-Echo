@@ -303,7 +303,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4551649584515302901, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.1
+      value: -7.17
       objectReference: {fileID: 0}
     - target: {fileID: 4551649584515302901, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -341,26 +341,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5711479568036990232, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
-      propertyPath: m_Mass
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5783634213755032118, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5783634213755032118, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 52210811
-      objectReference: {fileID: 0}
     - target: {fileID: 6187617263189552142, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7363021858612683598, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 777226910}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -959,11 +943,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4551649584515302901, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
   m_PrefabInstance: {fileID: 329598559}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &777226910 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 862184647803581318, guid: a27809160ca159c4e87e683c52e2608f, type: 3}
-  m_PrefabInstance: {fileID: 329598559}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1012815060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,11 +1378,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1558924767 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8109197382339765743, guid: 822a96704bd44364e921e02ad56c9035, type: 3}
-  m_PrefabInstance: {fileID: 3995887606878323220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1772677113
 GameObject:
   m_ObjectHideFlags: 0
@@ -8407,14 +8381,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 777226909}
-    - target: {fileID: 5983716948826259841, guid: 822a96704bd44364e921e02ad56c9035, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1558924767}
-    - target: {fileID: 5983716948826259841, guid: 822a96704bd44364e921e02ad56c9035, type: 3}
-      propertyPath: attackRange
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8859266468261700883, guid: 822a96704bd44364e921e02ad56c9035, type: 3}
       propertyPath: m_Name
       value: Patrol Enemy

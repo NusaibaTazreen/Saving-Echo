@@ -15,6 +15,10 @@ public class PatrolEnemy : MonoBehaviour
     public float retrieveDistance = 2.5f;
     public float chaseSpeed = 4f;
     public Animator animator;
+   
+    public Transform attackPoint;
+    public float attackRadius = 1f;
+    public LayerMask attackLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +29,7 @@ public class PatrolEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (Vector2.Distance(transform.position, player.position) <= attackRange)
         {
             inRange = true;
@@ -35,16 +40,15 @@ public class PatrolEnemy : MonoBehaviour
         }
 
         if (inRange){
-            
-            if (player.position.x < transform.position.x && facingLeft == false)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-                facingLeft = true;
-            }
-            else if (player.position.x > transform.position.x && facingLeft == true)
+            if (facingLeft && player.position.x > transform.position.x)
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 facingLeft = false;
+            }
+            else if (!facingLeft && player.position.x < transform.position.x)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                facingLeft = true;
             }
             if (Vector2.Distance(transform.position, player.position) > retrieveDistance)
             {
@@ -72,9 +76,17 @@ public class PatrolEnemy : MonoBehaviour
                 facingLeft = true;
             }
         }
-
         
     }
+
+    public void Attack()
+        {
+            Collider2D collinfo = Physics2D.OverlapCircle(attackPoint.position, attackRadius, attackLayer);
+            if (collinfo == true)
+            {
+                Debug.Log(collinfo.transform.name);
+            }
+        }
 
     private void OnDrawGizmos()
     {
@@ -86,5 +98,15 @@ public class PatrolEnemy : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if(attackPoint == null){
+            return;
+        }
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 }
+
+
+
+// problem with facing left and right in inRAnge function

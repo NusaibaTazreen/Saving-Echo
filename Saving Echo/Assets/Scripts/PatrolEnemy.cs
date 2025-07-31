@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PatrolEnemy : MonoBehaviour
 {
+    public int maxHealth = 3;
     public bool facingLeft = true;
     public float moveSpeed = 2f;
     public Transform checkPoint;
@@ -29,6 +30,15 @@ public class PatrolEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (FindObjectOfType<GameManager>().isGameActive == false)
+        {
+            return;
+        }
+        if (maxHealth <= 0)
+        {
+            Die();
+        }
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (Vector2.Distance(transform.position, player.position) <= attackRange)
         {
@@ -80,16 +90,26 @@ public class PatrolEnemy : MonoBehaviour
     }
 
     public void Attack()
+    {
+        Collider2D collinfo = Physics2D.OverlapCircle(attackPoint.position, attackRadius, attackLayer);
+        if (collinfo == true)
         {
-            Collider2D collinfo = Physics2D.OverlapCircle(attackPoint.position, attackRadius, attackLayer);
-            if (collinfo == true)
+            if (collinfo.gameObject.GetComponent<Player>() != null)
             {
-                if (collinfo.gameObject.GetComponent<Player>() != null)
-                {
-                    collinfo.gameObject.GetComponent<Player>().TakeDamage(1); 
-                }
+                collinfo.gameObject.GetComponent<Player>().TakeDamage(1); 
             }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (maxHealth <= 0)
+        {
+            return;
+        }
+        maxHealth -= damage;
+        animator.SetTrigger("Hurt");
+    }
 
     private void OnDrawGizmos()
     {
@@ -107,6 +127,11 @@ public class PatrolEnemy : MonoBehaviour
         }
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 }
 

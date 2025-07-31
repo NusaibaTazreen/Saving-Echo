@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     private float movement;
     public float moveSpeed = 5f;
     private bool facingRight = true;
+
+    public Transform attackPoint;
+    public float attackRadius = 1f;
+    public LayerMask attackLayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,7 +31,7 @@ public class Player : MonoBehaviour
             Die();
         }
 
-        health.text = maxHealth;
+        health.text = maxHealth.ToString();
         
         movement = Input.GetAxis("Horizontal");
 
@@ -84,6 +88,27 @@ public class Player : MonoBehaviour
         
     }
 
+    public void Attack() {
+        Collider2D collinfo = Physics2D.OverlapCircle(attackPoint.position, attackRadius, attackLayer);
+        if (collinfo)
+        {
+            if (collinfo.gameObject.GetComponent<PatrolEnemy>() != null)
+            {
+                collinfo.gameObject.GetComponent<PatrolEnemy>().TakeDamage(1);
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        //Gizmos.color = Color.red;
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+    }
+
     public void TakeDamage(int damage)
     {
         if (maxHealth <= 0)
@@ -96,5 +121,7 @@ public class Player : MonoBehaviour
     void Die()
     {
         Debug.Log("Player died");
+        FindObjectOfType<GameManager>().isGameActive = false;
+        Destroy(this.gameObject);
     }
 }

@@ -1,7 +1,10 @@
 using UnityEngine;
-
-public class script1 : MonoBehaviour
+using UnityEngine.UI;
+public class Player : MonoBehaviour
 {
+    public int maxHealth = 3;
+    public Text health;
+
     public Animator animator;
     public Rigidbody2D rb;
     public float jumpHeight = 5f;
@@ -19,6 +22,13 @@ public class script1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (maxHealth <= 0)
+        {
+            Die();
+        }
+
+        health.text = maxHealth;
+        
         movement = Input.GetAxis("Horizontal");
 
         if (movement <0f && facingRight)
@@ -72,5 +82,19 @@ public class script1 : MonoBehaviour
             animator.SetBool("Jump", false);
         } 
         
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (maxHealth <= 0)
+        {
+            return;
+        }
+        maxHealth -= damage;
+    }
+
+    void Die()
+    {
+        Debug.Log("Player died");
     }
 }

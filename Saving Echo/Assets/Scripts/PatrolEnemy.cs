@@ -50,6 +50,7 @@ public class PatrolEnemy : MonoBehaviour
         }
 
         if (inRange){
+            Debug.Log("In range of player");
             if (facingLeft && player.position.x > transform.position.x)
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
@@ -71,6 +72,7 @@ public class PatrolEnemy : MonoBehaviour
             }
         }
         else {
+            Debug.Log("Not in range of player");
             transform.Translate(Vector2.left * Time.deltaTime * moveSpeed);
 
             RaycastHit2D hit = Physics2D.Raycast(checkPoint.position, Vector2.down, distance);
@@ -134,7 +136,3 @@ public class PatrolEnemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
-
-
-
-// problem with facing left and right in inRAnge function

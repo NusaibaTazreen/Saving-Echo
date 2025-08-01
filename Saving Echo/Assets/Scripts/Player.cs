@@ -3,6 +3,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Text coinText;
+    public Text WinText;
     public int currentCoin = 0;
     public int maxHealth = 3;
     public Text health;
@@ -88,6 +89,14 @@ public class Player : MonoBehaviour
             isGround = true;
             animator.SetBool("Jump", false);
         } 
+
+        if (collision.gameObject.tag == "Echo")
+        {
+            WinText.gameObject.SetActive(true);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+
+        else
         
     }
 
@@ -130,10 +139,7 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject, 1f);
         }
 
-        if (other.gameObject.tag == "Echo")
-        {
-            FindObjectOfType<SceneManagement>().LoadLevel();
-        }
+        
     }
 
     void Die()
@@ -141,5 +147,6 @@ public class Player : MonoBehaviour
         Debug.Log("Player died");
         FindObjectOfType<GameManager>().isGameActive = false;
         Destroy(this.gameObject);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }

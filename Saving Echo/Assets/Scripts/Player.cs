@@ -95,8 +95,6 @@ public class Player : MonoBehaviour
             WinText.gameObject.SetActive(true);
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
-
-        else
         
     }
 
